@@ -36,7 +36,7 @@ class UsersTest < ApplicationSystemTestCase
     assert_equal root_path, page.current_path
   end
 
-  test "signing in when there is an erro" do
+  test "signing in when there is an error" do
     visit new_user_session_path
 
     fill_in "Email", with: "nicolas@newsboy.dev"
@@ -45,5 +45,19 @@ class UsersTest < ApplicationSystemTestCase
 
     assert_text "Invalid Email or password."
     assert_equal user_session_path, page.current_path
+  end
+
+  test "signing out" do
+    email = "nicolas@newsboy.dev"
+    password = "my-secret-password"
+    user = User.create(email: email, password: password)
+    login_as(user, scope: :user)
+
+    visit root_path
+
+    click_on "Sign out"
+
+    assert_text "Signed out successfully."
+    assert_equal new_user_session_path, page.current_path
   end
 end
