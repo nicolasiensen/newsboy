@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="mx-auto col-md-6 col-lg-4">
+      <h2 class="text-center font-weight-lighter">Forgot your password?</h2>
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "bg-white p-3 border rounded my-3", novalidate: true }) do |f| %>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: ["form-control", resource.errors.include?(:email) && "is-invalid"] %>
+          <div class="invalid-feedback">
+            <%= resource.errors.full_messages_for(:email).join(",") %>
+          </div>
+        </div>
+
+        <%= f.submit "Send me reset password instructions", class: "btn btn-primary d-block w-100"%>
+      <% end %>
+
+      <div class="text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

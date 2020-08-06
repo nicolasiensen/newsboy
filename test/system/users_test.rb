@@ -19,6 +19,8 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Sign up"
 
     assert_equal user_registration_path, page.current_path
+    assert_text "Email can't be blank"
+    assert_text "Password can't be blank"
   end
 
   test "signing in" do
