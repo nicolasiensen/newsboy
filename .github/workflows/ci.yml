@@ -34,7 +34,7 @@ jobs:
       with:
         ruby-version: 2.7.1
     - name: Install chromedriver
-      run: sudo apt-get -yqq install chromium-chromedriver
+      run: sudo apt-get -yqq --fix-missing install chromium-chromedriver
     - name: Install Yarn dependencies
       uses: borales/actions-yarn@v2.0.0
       with:
