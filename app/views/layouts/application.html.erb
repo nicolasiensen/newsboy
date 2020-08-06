@@ -12,13 +12,15 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <%= link_to "Newsboy", root_path, class: "navbar-brand" %>
-      <ul class="navbar-nav ml-auto">
-        <%= link_to "Sign out", destroy_user_session_path, class: "nav-link", method: :delete %>
-      </ul>
-    </nav>
+  <body class="bg-light">
+    <% if user_signed_in? %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <%= link_to "Newsboy", root_path, class: "navbar-brand" %>
+        <ul class="navbar-nav ml-auto">
+          <%= link_to "Sign out", destroy_user_session_path, class: "nav-link", method: :delete %>
+        </ul>
+      </nav>
+    <% end %>
     
     <% if notice.present? %>
       <div class="alert alert-success" role="alert">
