@@ -1,7 +1,16 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  include Devise::Test::IntegrationHelpers
+
+  test "getting the dashboard" do
+    sign_in users(:nico)
+    get root_path
+    assert_response :success
+  end
+
+  test "getting the dashboard when the user is not logged in" do
+    get root_path
+    assert_redirected_to new_user_session_path
+  end
 end

@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class UsersTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   test "signing up" do
     visit new_user_registration_path
     
@@ -60,6 +62,21 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Sign out"
 
     assert_text "Signed out successfully."
+    assert_equal new_user_session_path, page.current_path
+  end
+
+  test "visiting the dashboard" do
+    sign_in users(:mary)
+    
+    visit root_path
+
+    assert_equal root_path, page.current_path
+  end
+
+  test "visiting the dashboard when the user is not logged in" do
+    visit root_path
+
+    assert_text "You need to sign in or sign up before continuing."
     assert_equal new_user_session_path, page.current_path
   end
 end
