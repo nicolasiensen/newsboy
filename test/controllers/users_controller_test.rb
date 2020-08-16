@@ -4,7 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   test "getting the dashboard" do
-    sign_in users(:nico)
+    sign_in users(:mary)
     get root_path
     assert_response :success
   end
