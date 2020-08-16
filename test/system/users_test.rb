@@ -12,7 +12,7 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Sign up"
 
     assert_text "Welcome! You have signed up successfully."
-    assert_equal root_path, page.current_path
+    assert_equal new_producer_path, page.current_path
   end
 
   test "signing up when there is an error" do
@@ -37,7 +37,7 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Log in"
 
     assert_text "Signed in successfully."
-    assert_equal root_path, page.current_path
+    assert_equal new_producer_path, page.current_path
   end
 
   test "signing in when there is an error" do
@@ -71,6 +71,14 @@ class UsersTest < ApplicationSystemTestCase
     visit root_path
 
     assert_equal root_path, page.current_path
+  end
+
+  test "visiting the dashboard when the user has no producer" do
+    sign_in users(:mila)
+    
+    visit root_path
+
+    assert_equal new_producer_path, page.current_path
   end
 
   test "visiting the dashboard when the user is not logged in" do
